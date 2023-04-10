@@ -1,9 +1,11 @@
 import './App.css';
+import Login from './Components/Signup'
+
 
 function App() {
   return (
-    <div className="App">
-      Reels Clone
+    <div>
+      <Login/>
     </div>
   );
 }

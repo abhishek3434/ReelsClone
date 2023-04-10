@@ -1,0 +1,19 @@
+.signup-main{
+display: flex;
+justify-content: center;
+}
+.signup-div{
+margin: 5%;
+width: 25vw;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+.logo img{
+    
+}
+
