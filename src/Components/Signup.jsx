@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Link} from 'react-router-dom';
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,9 +8,9 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import Alert from '@mui/material/Alert';
-import TextField from '@mui/material/TextField';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import "../Style/signup.css";
 
@@ -40,15 +41,58 @@ export default function Login() {
               This is an error alert — <strong>check it out!</strong>
             </Alert>
 
-            <TextField id="outlined-basic" label="Full Name" variant="outlined" margin="dense" fullWidth size="small"/>
-            <TextField id="outlined-basic" label="Email" variant="outlined" margin="dense" fullWidth size="small" />
-            <TextField id="outlined-basic" label="Password" variant="outlined" margin="dense" fullWidth size="small" />
-            <Button size="small" color="secondary" fullWidth margin="dense" startIcon={<CloudUploadIcon/>} variant="outlined" >Upload Image</Button>
+            <TextField
+              id="outlined-basic"
+              label="Full Name"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              size="small"
+            />
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              size="small"
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              size="small"
+            />
+            <Button
+              size="small"
+              color="secondary"
+              fullWidth
+              margin="dense"
+              startIcon={<CloudUploadIcon />}
+              variant="outlined"
+              component="label"
+            >
+              Upload Image
+              <input type="file" accept='image/*' hidden/>
+            </Button>
           </CardContent>
           <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
+            <Button color="primary" fullWidth variant="contained">SignUp</Button>
           </CardActions>
+          <CardContent>
+            <Typography className={classes.text1} variant="subtitle1">
+              By signing up, you agree our terms and condition
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card variant="outlined">
+        <CardContent>
+            <Typography className={classes.text1} variant="subtitle1">
+              Having account ?<Link to='/login'>Login</Link>
+            </Typography>
+          </CardContent>
         </Card>
       </div>
     </div>
