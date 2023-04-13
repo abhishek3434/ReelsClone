@@ -1,0 +1,17 @@
+.signin-main {
+  display: flex;
+  justify-content: center;
+}
+.signin-div {
+  margin: 5%;
+  width: 35vw;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+.logo img {
+}

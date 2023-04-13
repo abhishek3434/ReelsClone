@@ -10,22 +10,24 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
-import "../Style/signup.css";
+import "../Style/signin.css";
 
-export default function Signup() {
+export default function Signin() {
   const useStyles = makeStyles({
     text1: {
       textAlign: "center",
       color: "gray ",
     },
+    text2:{
+        textAlign:"center"
+    }
   });
   const classes = useStyles();
 
   return (
-    <div className="signup-main">
-      <div className="signup-div">
+    <div className="signin-main">
+      <div className="signin-div">
         <Card variant="outlined">
           <div className="logo">
             <img
@@ -35,20 +37,13 @@ export default function Signup() {
           </div>
           <CardContent>
             <Typography className={classes.text1} variant="subtitle1">
-              Signup to see more photos and videos from your friend
+              signin to see more photos and videos from your friend
             </Typography>
             <Alert severity="error">
               This is an error alert — <strong>check it out!</strong>
             </Alert>
 
-            <TextField
-              id="outlined-basic"
-              label="Full Name"
-              variant="outlined"
-              margin="dense"
-              fullWidth
-              size="small"
-            />
+           
             <TextField
               id="outlined-basic"
               label="Email"
@@ -65,32 +60,19 @@ export default function Signup() {
               fullWidth
               size="small"
             />
-            <Button
-              size="small"
-              color="secondary"
-              fullWidth
-              margin="dense"
-              startIcon={<CloudUploadIcon />}
-              variant="outlined"
-              component="label"
-            >
-              Upload Image
-              <input type="file" accept='image/*' hidden/>
-            </Button>
+            
           </CardContent>
+          <Typography color="primary" className={classes.text2}>
+            Forgot password?
+          </Typography>
           <CardActions>
-            <Button color="primary" fullWidth variant="contained">SignUp</Button>
+            <Button color="primary" fullWidth variant="contained">SignIn</Button>
           </CardActions>
-          <CardContent>
-            <Typography className={classes.text1} variant="subtitle1">
-              By signing up, you agree our terms and condition
-            </Typography>
-          </CardContent>
         </Card>
         <Card variant="outlined">
         <CardContent>
             <Typography className={classes.text1} variant="subtitle1">
-              Having account ?<Link to='/signin'>Login</Link>
+              Don't have account ?<Link to='/signin'>signin</Link>
             </Typography>
           </CardContent>
         </Card>

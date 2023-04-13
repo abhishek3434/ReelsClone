@@ -1,5 +1,6 @@
 import './App.css';
-import Login from './Components/Signup'
+import Signup from './Components/Signup'
+import Signin from './Components/Signin';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
 
     <div>
       <BrowserRouter>
-      <Login/>
+      {/* <Signup/> */}
+      <Signin/>
       </BrowserRouter>
       
     </div>
