@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -13,6 +14,10 @@ import TextField from "@mui/material/TextField";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import "../Style/signup.css";
+import { AuthContext } from "../Context/AuthContext";
+
+import { storage, database} from "../firebase";
+
 
 export default function Signup() {
   const useStyles = makeStyles({
@@ -22,6 +27,86 @@ export default function Signup() {
     },
   });
   const classes = useStyles();
+  const [email, setEmail] = useState();
+  const [name, setName] = useState();
+  const [password, setPassword] = useState();
+  const [file, setFile] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const history = useNavigate();
+  const { signup } = useContext(AuthContext);
+
+  const getName = (e) => {
+    let name = e.target.value;
+    setName(name);
+  };
+  const getEmail = (e) => {
+    let email = e.target.value;
+    setEmail(email);
+  };
+  const getPassword = (e) => {
+    let password = e.target.value;
+    setPassword(password);
+  };
+
+  const getFile = (e) => {
+    let newFile = e.target.files[0];
+    setFile(newFile);
+  };
+
+  const signinSubmit = async () => {
+    if (file === null) {
+      setError("Please upload image first");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+      return;
+    }
+    
+
+
+    try {
+      setLoading(true);
+      setError("");
+      let userObj = await signup(email, password);
+      let uid = userObj.user.uid;
+      const uploadTask = storage.ref(`/data/${uid}/profilepicture`).put(file);
+      uploadTask.on("state_changed", fn1, fn2, fn3);
+      function fn1(snapshot) {
+        console.log(snapshot);
+        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress} done.`);
+      }
+      function fn2(error) {
+        
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        setLoading(false);
+        return;
+      }
+      function fn3() {
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+          database.users.doc(uid).set({
+            email: email,
+            userId: uid,
+            fullname: name,
+            profileUrl: url,
+            createdAt: database.getTime(),
+          });
+        });
+      }
+      history("/");
+    } catch (error) {
+      setError(error.code)
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="signup-main">
@@ -37,33 +122,41 @@ export default function Signup() {
             <Typography className={classes.text1} variant="subtitle1">
               Signup to see more photos and videos from your friend
             </Typography>
-            <Alert severity="error">
-              This is an error alert — <strong>check it out!</strong>
-            </Alert>
+            {error !== "" && (
+              <Alert severity="error">
+                {error}
+              </Alert>
+            )}
 
             <TextField
-              id="outlined-basic"
+              id="outlined-basic_name"
               label="Full Name"
+              type="text"
               variant="outlined"
               margin="dense"
               fullWidth
               size="small"
+              onChange={getName}
             />
             <TextField
-              id="outlined-basic"
+              id="outlined-basic_email"
+              type="email"
               label="Email"
               variant="outlined"
               margin="dense"
               fullWidth
               size="small"
+              onChange={getEmail}
             />
             <TextField
-              id="outlined-basic"
+              id="outlined-basic_password"
               label="Password"
+              type="password"
               variant="outlined"
               margin="dense"
               fullWidth
               size="small"
+              onChange={getPassword}
             />
             <Button
               size="small"
@@ -75,11 +168,19 @@ export default function Signup() {
               component="label"
             >
               Upload Image
-              <input type="file" accept='image/*' hidden/>
+              <input type="file" onChange={getFile} hidden />
             </Button>
           </CardContent>
           <CardActions>
-            <Button color="primary" fullWidth variant="contained">SignUp</Button>
+            <Button
+              color="primary"
+              fullWidth
+              disabled={loading}
+              variant="contained"
+              onClick={signinSubmit}
+            >
+              SignUp
+            </Button>
           </CardActions>
           <CardContent>
             <Typography className={classes.text1} variant="subtitle1">
@@ -88,9 +189,9 @@ export default function Signup() {
           </CardContent>
         </Card>
         <Card variant="outlined">
-        <CardContent>
+          <CardContent>
             <Typography className={classes.text1} variant="subtitle1">
-              Having account ?<Link to='/signin'>Login</Link>
+              Having account ?<Link to="/login">Login</Link>
             </Typography>
           </CardContent>
         </Card>
