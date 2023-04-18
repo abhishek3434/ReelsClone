@@ -1,12 +1,12 @@
-import React,{useContext} from 'react';
-import {AuthContext, AuthProvider} from '../Context/AuthContext'
+import React, { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 
 const Feed = () => {
-  const {user} =useContext(AuthContext)
-  
+ let {logout} =useContext(AuthContext)
     return (
         <div>
-          Welcome to feed   {user.multiFactor.user.uid}
+          Welcome to feed
+          <button onClick={logout}>Logout</button>   
         </div>
     );
 };

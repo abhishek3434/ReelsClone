@@ -15,11 +15,12 @@ import "../Style/signin.css";
 import { AuthContext } from "../Context/AuthContext";
 
 export default function Signin() {
-  const { login,setUser } = useContext(AuthContext);
+  const { login} = useContext(AuthContext);
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
+  const [loading,setLoading]=useState(false);
 
   const history = useNavigate();
 
@@ -34,8 +35,8 @@ export default function Signin() {
 
   const onLogin = async () => {
     try {
+      setLoading(true)
       let userObj = await login(email, password);
-      setUser(userObj.multiFactor.user.uid);
       history("/");
     } catch (error) {
       setError(error.code);
@@ -43,6 +44,7 @@ export default function Signin() {
         setError("");
       }, 5000);
     }
+    setLoading(false)
   };
 
   const useStyles = makeStyles({
@@ -100,6 +102,7 @@ export default function Signin() {
               fullWidth
               variant="contained"
               onClick={onLogin}
+              disabled={loading}
             >
               SignIn
             </Button>
