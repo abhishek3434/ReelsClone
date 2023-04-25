@@ -1,7 +1,9 @@
 import React,{useEffect,useState} from 'react';
 import { database } from '../firebase';
 import CircularProgress from '@mui/material/CircularProgress';
+import Avatar from '@mui/material/Avatar';
 import Videos from './Videos';
+import '../Style/post.css'
 
 function Posts({user}) {
     const [posts,setPost]=useState(null);
@@ -21,11 +23,14 @@ function Posts({user}) {
         <div>
             {
                 user==null || posts==null?<CircularProgress />:
-                <div className='videoContainer'>
+                <div className='video-container'>
                     {
                         posts.map((post,index)=>(
-                            <div key={index}>
+                            <div className='video' key={index}>
                                 <Videos url={post.pUrl}/>
+                                <div className='fa' style={{display:'flex'}}>
+                                <Avatar alt="Travis Howard" src={user.profileUrl} />
+                                </div>
                             </div>
                         ))
                     }
