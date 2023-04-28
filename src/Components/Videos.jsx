@@ -14,11 +14,9 @@ const Videos = ({url}) => {
             e.target.muted=true
         }
     }
-    const handleSound=(e)=>{
-        
-    }
+    
     return (
-        <video src={url} autoPlay={true}   onDoubleClick={handleSound} onEnded={handleScroll} className='video-styling' muted='muted' onClick={handleClick} controls>
+        <video src={url} autoPlay={true}    onEnded={handleScroll} className='video-styling' muted='muted' onClick={handleClick} >
 
         </video>
     );

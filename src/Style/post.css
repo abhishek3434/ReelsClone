@@ -11,3 +11,24 @@
     height: 80vh;
     scroll-snap-align: start;
 }
+.fa{
+    position: absolute;
+    bottom: 15%;
+    left:2%;
+}
+.video{
+    position: relative;
+}
+.icon-styling{
+    position: absolute;
+    bottom:10%;
+    left:3%;
+}
+.like{
+    cursor: pointer;
+    color: red;
+}
+.unlike{
+    cursor: pointer;
+    color:white;
+}

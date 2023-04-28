@@ -1,9 +1,13 @@
 import React,{useEffect,useState} from 'react';
+import Like from './Like'
+
 import { database } from '../firebase';
 import CircularProgress from '@mui/material/CircularProgress';
+
 import Avatar from '@mui/material/Avatar';
 import Videos from './Videos';
 import '../Style/post.css'
+
 
 function Posts({user}) {
     const [posts,setPost]=useState(null);
@@ -29,8 +33,10 @@ function Posts({user}) {
                             <div className='video' key={index}>
                                 <Videos url={post.pUrl}/>
                                 <div className='fa' style={{display:'flex'}}>
-                                <Avatar alt="Travis Howard" src={user.profileUrl} />
+                                <Avatar src={user.profileUrl} />
+                                {/* <h5>{user.fullname}</h5> */}
                                 </div>
+                                <Like user={user} post={post}/>
                             </div>
                         ))
                     }
