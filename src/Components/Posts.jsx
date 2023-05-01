@@ -3,6 +3,7 @@ import Like from './Like'
 
 import { database } from '../firebase';
 import CircularProgress from '@mui/material/CircularProgress';
+import Comments from './Comments';
 
 import Avatar from '@mui/material/Avatar';
 import Videos from './Videos';
@@ -37,6 +38,7 @@ function Posts({user}) {
                                 {/* <h5>{user.fullname}</h5> */}
                                 </div>
                                 <Like user={user} post={post}/>
+                                <Comments user={user} post={post} url={post.pUrl}/>                               
                             </div>
                         ))
                     }

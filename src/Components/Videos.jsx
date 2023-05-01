@@ -16,7 +16,7 @@ const Videos = ({url}) => {
     }
     
     return (
-        <video src={url} autoPlay={true}    onEnded={handleScroll} className='video-styling' muted='muted' onClick={handleClick} >
+        <video src={url} autoPlay={true} onEnded={handleScroll} className='video-styling' muted='muted' onClick={handleClick} >
 
         </video>
     );

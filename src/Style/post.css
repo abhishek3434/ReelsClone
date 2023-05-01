@@ -13,7 +13,7 @@
 }
 .fa{
     position: absolute;
-    bottom: 15%;
+    bottom: 24%;
     left:2%;
 }
 .video{
@@ -21,8 +21,8 @@
 }
 .icon-styling{
     position: absolute;
-    bottom:10%;
-    left:3%;
+    bottom:18%;
+    left:4%;
 }
 .like{
     cursor: pointer;
@@ -31,4 +31,31 @@
 .unlike{
     cursor: pointer;
     color:white;
+}
+.comment{
+    cursor: pointer;
+    color: white;
+}
+.comment-position{
+    position: absolute;
+    bottom:12%;
+    left:4%
+}
+.modal-container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+.video-comment-container{
+    width: 50%;
+    height: 100%;
+}
+.comment-container{
+    width: 50%;
+    height: 100%;
+}
+.modal-video{
+    height: 100%;
+    width: 100%;
 }
