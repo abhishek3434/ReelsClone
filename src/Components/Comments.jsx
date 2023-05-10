@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Videos from "./Videos";
 import '../Style/post.css'
 
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+
+import LikeModal from "./LikeModal";
+import AddComment from "./AddComment";
+import FetchComment from "./FetchComment";
 
 const Comments = ({ user, post,url}) => {
   const [open, setOpen] = useState(null);
@@ -36,53 +32,24 @@ const Comments = ({ user, post,url}) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        fullWidth={true}
+        fullWidth
         maxWidth="sm"
       >
         <div className="modal-container">
           <div className="video-comment-container">
-            <Videos url={url}  />
+            <Videos url={url} scrollNext={false}  />
           </div>
           <div className="comment-container">
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image="/static/images/cards/contemplative-reptile.jpg"
-                title="green iguana"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
+            <Card className='comment-modal' sx={{ maxWidth: 345 }}>
+              <FetchComment post={post}/>
             </Card>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image="/static/images/cards/contemplative-reptile.jpg"
-                title="green iguana"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
+            <Card  variant="outlined">
+              
+              <div style={{'display':'flex'}}>
+              <Typography>{post.likes.length!==0?'Liked By '+post.likes.length:''} </Typography>
+              <LikeModal user={user} post={post}/> 
+              </div>             
+              <AddComment user={user} post={post}/>
             </Card>
           </div>
         </div>

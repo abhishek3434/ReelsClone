@@ -32,7 +32,7 @@ function Posts({user}) {
                     {
                         posts.map((post,index)=>(
                             <div className='video' key={index}>
-                                <Videos url={post.pUrl}/>
+                                <Videos url={post.pUrl} scrollNext={true}/>
                                 <div className='fa' style={{display:'flex'}}>
                                 <Avatar src={user.profileUrl} />
                                 {/* <h5>{user.fullname}</h5> */}
